@@ -1,4 +1,4 @@
-FROM golang:1.17.5 AS build-env
+FROM golang:1.19.1 AS build-env
 ENV GOPROXY https://goproxy.cn
 ADD . /go/src/app
 WORKDIR /go/src/app
