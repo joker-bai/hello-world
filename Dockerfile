@@ -10,5 +10,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     apk add -U tzdata
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
 COPY --from=build-env /go/src/app/app-server /usr/local/bin/app-server
+COPY --from=build-env /go/src/app/index.html /usr/local/bin/index.html
 EXPOSE 8080
 CMD [ "app-server" ]
