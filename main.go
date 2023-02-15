@@ -54,8 +54,7 @@ func main() {
 		// get content from mysql
 		var hello HelloWorld
 		db.First(&hello, "1")
-		g.LoadHTMLFiles("index.html")
-		context.HTML(http.StatusOK, "index.html", hello)
+		context.String(http.StatusOK, hello.Text)
 	})
 
 	if err := g.Run(); err != nil {

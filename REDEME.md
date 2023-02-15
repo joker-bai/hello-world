@@ -80,6 +80,7 @@ Next, we will create the YAML file for the Hello World application. This file wi
        containers:
          - name: helloworld
            image: baidjay/hello-world:v2.0
+           imagePullPolicy: Always
            env:
              - name: MYSQL_USER
                value: root
