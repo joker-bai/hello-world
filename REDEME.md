@@ -50,7 +50,7 @@ This guide will walk you through deploying a MySQL database and a Hello World ap
                mountPath: /var/lib/mysql
        volumes:
          - name: mysql-persistent-storage
-           empty: {}
+           emptyDir: {}
 ```
 
 2. Apply the MySQL deployment and service YAML file.
@@ -89,6 +89,8 @@ Next, we will create the YAML file for the Hello World application. This file wi
                value: mysql
              - name: MYSQL_DBNAME
                value: hello-world
+             - name: CONTENT
+               value: Hello World
            ports:
              - containerPort: 8080
  ---

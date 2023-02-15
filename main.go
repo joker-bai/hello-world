@@ -28,7 +28,9 @@ func init() {
 	mysqlAddress := os.Getenv("MYSQL_ADDRESS")
 	mysqlDBName := os.Getenv("MYSQL_DBNAME")
 	content := os.Getenv("CONTENT")
-	fmt.Print(mysqlUser, mysqlPassword, mysqlAddress, mysqlDBName)
+	log.Printf("mysql user: %s, mysql password: %s, mysql address: %s, mysql db name: %s, content: %s",
+		mysqlUser, mysqlPassword, mysqlAddress, mysqlDBName, content,
+	)
 	// init database
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		mysqlUser, mysqlPassword, mysqlAddress, mysqlDBName)
@@ -38,6 +40,9 @@ func init() {
 	}
 
 	// auto migrate
+	if db.Migrator().HasTable(&HelloWorld{}) {
+		db.Migrator().DropTable(&HelloWorld{})
+	}
 	db.AutoMigrate(&HelloWorld{})
 	db.Create(&HelloWorld{Text: content})
 }
